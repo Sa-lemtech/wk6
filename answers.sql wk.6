@@ -1,0 +1,43 @@
+-- Question 1: INNER JOIN
+-- Retrieves employee details and their associated office code.
+-- INNER JOIN ensures that only employees who have a matching office code in the 'offices' table are included.
+SELECT
+    e.firstName,
+    e.lastName,
+    e.email,
+    e.officeCode
+FROM
+    employees AS e
+INNER JOIN
+    offices AS o ON e.officeCode = o.officeCode;
+
+
+-- Question 2: LEFT JOIN
+-- Retrieves product details, ensuring ALL products from the 'products' table are included,
+-- even if they do not have a corresponding entry in the 'productlines' table (productLine will be NULL).
+SELECT
+    p.productName,
+    p.productVendor,
+    p.productLine
+FROM
+    products AS p
+LEFT JOIN
+    productlines AS pl ON p.productLine = pl.productLine;
+
+
+-- Question 3: RIGHT JOIN
+-- Retrieves order details and customer number.
+-- A RIGHT JOIN ensures that ALL orders from the 'orders' table are included (the right table),
+-- even if there is no matching customer in the 'customers' table.
+-- Note: In most SQL dialects, you can achieve the same result more intuitively with a LEFT JOIN by swapping the table order (orders LEFT JOIN customers).
+SELECT
+    o.orderDate,
+    o.shippedDate,
+    o.status,
+    o.customerNumber
+FROM
+    customers AS c
+RIGHT JOIN
+    orders AS o ON c.customerNumber = o.customerNumber
+LIMIT 10;
+-- The 'LIMIT 10' clause restricts the result set to the first 10 orders retrieved.
